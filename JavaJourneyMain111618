@@ -1,0 +1,104 @@
+import java.util.Scanner;
+
+public class JavaJourneyMain111618 { //v2
+
+   public static void introduction(String[] plInventory) {
+      
+      String userInput;
+      char userInput2;
+   
+      Scanner scnr = new Scanner(System.in);
+      Scanner scnr2 = new Scanner(System.in);
+      
+      System.out.println("Type 'i' for instructions or 'b' to begin.");
+      System.out.print("> ");
+      userInput = scnr.nextLine();
+   
+      switch (userInput){
+         case "i":
+         case "instructions":
+            System.out.println("Instructions:");
+            System.out.println("");
+            System.out.println("l or look: shows the description of the room.");
+            System.out.println("n or north, s or south, e or east, w or west: moves you through the game.");
+            System.out.println("i or inventory: lists the items in your inventory - NYI"); //NYI - FIXME
+            System.out.println("");
+            System.out.println("Type any letter and hit enter when ready.");
+            System.out.print("> ");
+            userInput2 = scnr2.next().charAt(0);
+            riverShoreDesc(plInventory);
+            break;
+         case "b":
+         case "begin":
+            System.out.println("");
+            System.out.println("");
+            riverShoreDesc(plInventory);
+            break;
+         default:
+            System.out.println("Try again?");  //Example of recursion for error handling
+            System.out.print("");
+            introduction(plInventory);
+            break;
+         }
+      }
+      
+      
+      public static void riverShoreDesc(String[] plInventory){
+      
+         System.out.println("River Shore");
+         System.out.println("");
+         System.out.println("The waterfall you fell down - and managed to survive - thunders above you. Splashing you with cold droplets, the mighty river to the south flows too fast to cross safely. To the north, the opening to a mysterious cave yawns wide, and to the east, the wind whispers through the tall grass of a forest clearing.");
+         System.out.println("");
+         riverShore(plInventory);
+      }
+      
+      public static void riverShore(String[] plInventory){
+         String userInput2;
+         int i = 0; //counter
+         Scanner scnr2 = new Scanner(System.in);
+         
+         System.out.print("> ");
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "look":
+            case "l":
+               riverShoreDesc(plInventory);
+               break;
+            case "south":
+            case "South":
+            case "s":
+               System.out.println("You would drown if you tried to wade into the river. There is a damp piece of paper stuck beneath a rock, though.");
+               riverShore(plInventory);
+               break;
+            case "north":
+            case "North":
+            case "n":
+               System.out.println("Go to the clearing: FIXME."); //fixme
+               break;
+            case "inventory":
+            case "Inventory":
+            case "i":
+               for (i = 0; i < plInventory.length; ++i){
+                  System.out.print(plInventory[i] + " ");
+               }
+               riverShore(plInventory);
+                  break;
+            default: 
+               System.out.println("Try again?");
+               riverShore(plInventory);
+               break;
+               
+         }
+      }
+      
+      public static void main(String[] args){
+   
+      String userInput;
+      String[] plInventory = new String[3];
+      
+      System.out.println("Welcome to Java Journey!");
+      System.out.println("");
+      introduction(plInventory);
+   }
+}
