@@ -1,0 +1,262 @@
+mport java.util.Scanner;
+
+public class JavaJourneyMain112018 { //v3
+//Notes: The description of the south shore now updates when the player takes the piece of paper.
+//The strange cave is ready! Knob counterss / door checker implemented
+
+   public static void introduction(String[] plInventory, boolean doorOpen, int knobCounter) {
+      
+      String userInput;
+      char userInput2;
+   
+      Scanner scnr = new Scanner(System.in);
+      Scanner scnr2 = new Scanner(System.in);
+      
+      System.out.println("Type 'i' for instructions or 'b' to begin.");
+      System.out.print("> ");
+      userInput = scnr.nextLine();
+   
+      switch (userInput){
+         case "i":
+         case "instructions":
+            System.out.println("Instructions:");
+            System.out.println("");
+            System.out.println("l or look: shows the description of the room.");
+            System.out.println("n or north, s or south, e or east, w or west: moves you through the game.");
+            System.out.println("i or inventory: lists the items in your inventory");
+            System.out.println("take <item>: does exactly what it says");
+            System.out.println("");
+            System.out.println("Type any letter and hit enter when ready.");
+            System.out.print("> ");
+            userInput2 = scnr2.next().charAt(0);
+            riverShoreDesc(plInventory, doorOpen, knobCounter);
+            break;
+         case "b":
+         case "begin":
+            System.out.println("");
+            System.out.println("");
+            riverShoreDesc(plInventory, doorOpen, knobCounter);
+            break;
+         default:
+            System.out.println("Try again?");  //Example of recursion for error handling
+            System.out.print("");
+            introduction(plInventory, doorOpen, knobCounter);
+            break;
+         }
+      }
+      
+      
+      public static void riverShoreDesc(String[] plInventory, boolean doorOpen, int knobCounter){
+      
+         System.out.println("River Shore");
+         System.out.println("");
+         System.out.println("The waterfall you fell down - and managed to survive - thunders above you. Splashing you with cold droplets, the mighty river to the south flows too fast to cross safely. To the north, the opening to a mysterious cave yawns wide, and to the east, the wind whispers through the tall grass of a forest clearing.");
+         System.out.println("");
+         riverShore(plInventory, doorOpen, knobCounter);
+      }
+      
+      public static void riverShore(String[] plInventory, boolean doorOpen, int knobCounter){
+         String userInput2;
+         int i = 0; //counter
+         int j = 0; //second counter while I figure out a better way to do this
+         Scanner scnr2 = new Scanner(System.in);
+         
+         System.out.print("> ");
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "look":
+            case "l":
+               riverShoreDesc(plInventory, doorOpen, knobCounter);
+               break;
+            case "south":
+            case "South":
+            case "s":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("You would drown if you tried to wade into the river.");
+                  riverShore(plInventory, doorOpen, knobCounter);
+                  break;
+               }
+               else{
+                  System.out.println("You would drown if you tried to wade into the river. There is a damp piece of paper stuck beneath a rock, though.");
+                  riverShore(plInventory, doorOpen, knobCounter);
+                  break;
+                  }
+            case "east":
+            case "East":
+            case "e":
+               System.out.println("Go to the clearing: FIXME."); //fixme
+               break;
+            case "take paper":
+            case "Take paper":
+               System.out.println("You take the paper.");
+               plInventory[0] = "a wet piece of paper";
+               riverShore(plInventory, doorOpen, knobCounter);
+               break;
+            case "read paper":
+            case "Read paper":
+               System.out.println("There is nothing on this paper but the number 3.");
+               riverShore(plInventory, doorOpen, knobCounter);
+               break;
+            case "north":
+            case "n":
+            case "North":
+               if (doorOpen == true){
+               caveAltDesc(plInventory, doorOpen, knobCounter);
+               } else {
+               caveDesc(plInventory, doorOpen, knobCounter);
+               }
+               break;
+            case "inventory":
+            case "Inventory":
+            case "i":
+               for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+            
+               riverShore(plInventory, doorOpen, knobCounter);
+                  break;
+            default: 
+               System.out.println("Try again?");
+               riverShore(plInventory, doorOpen, knobCounter);
+               break;
+               
+         }
+      }
+      
+      public static void caveDesc(String[] plInventory, boolean doorOpen, int knobCounter){
+      
+         System.out.println("Strange Cave:");
+         System.out.println("");
+         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls - not to mention the fact that there are electric lights set into the walls, leaving no shadows for small creatures to hide in. A large door with a knob in the center stands at the tunnel.");
+         System.out.println("");
+         
+         cave(plInventory, doorOpen, knobCounter);
+      }
+      
+      public static void caveAltDesc(String[] plInventory, boolean doorOpen, int knobCounter){
+      
+         System.out.println("Strange Cave:");
+         System.out.println("");
+         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls - not to mention the fact that there are electric lights set into the walls, leaving no shadows for small creatures to hide in. A large door with a knob in the center stands at the tunnel. It is open.");
+         System.out.println("");
+         
+         cave(plInventory, doorOpen, knobCounter);
+      }
+
+      
+      public static void cave(String[] plInventory, boolean doorOpen, int knobCounter){
+         String userInput2;
+         int i = 0; //counter
+         int j = 0; //another counter
+      
+         System.out.print("> ");
+         Scanner scnr2 = new Scanner(System.in);
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "look":
+            case "l":
+            case "Look":
+               if (doorOpen == true){
+                  caveAltDesc(plInventory, doorOpen, knobCounter);
+                  } else {
+                     caveDesc(plInventory, doorOpen, knobCounter);
+                  }
+               break;
+            case "inventory":
+            case "i":
+            case "Inventory":
+                  for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+               cave(plInventory, doorOpen, knobCounter);
+                  break; 
+            case "n":
+            case "north":
+            case "North":
+               if (doorOpen == false){
+                  System.out.println("The gigantic door stands in your way. Perhaps there is a way to open it.");
+                  cave(plInventory, doorOpen, knobCounter);
+                  break;
+               }
+               else if (doorOpen == true){
+                  System.out.println("Barrier room: NYI"); //FixME
+                  break;
+               }
+            case "read paper":
+            case "Read paper":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("There is nothing on this paper but the number 3.");
+                  cave(plInventory, doorOpen, knobCounter);
+                  break;}
+               else {
+                  System.out.println("You don't have any paper.");
+               }
+
+            case "south":
+            case "s":
+            case "South":
+               riverShoreDesc(plInventory, doorOpen, knobCounter);
+            case "open":
+            case "open door":
+               System.out.println("You try pushing the door, but it won't budge.");
+               cave(plInventory, doorOpen, knobCounter);
+               break;
+            case "turn knob":
+            case "knob":
+               if (doorOpen == true) {
+                  System.out.println("The knob will not budge.");
+                  }
+               if ((doorOpen == false) && (knobCounter < 3)) {
+                  System.out.println("Click.");
+                  knobCounter = knobCounter + 1; // counter controlled repetition
+               }
+               if (knobCounter >= 3) {
+                  doorOpen = true;
+                  System.out.println("The huge door opens with an almost cartoonish creak.");
+               }
+               cave(plInventory, doorOpen, knobCounter);
+               break;
+            
+            default: 
+               System.out.println("Try again?");
+               cave(plInventory, doorOpen, knobCounter);
+               break;
+
+            } //end case
+      
+      }
+      
+      public static void main(String[] args){
+   
+      String userInput;
+      String[] plInventory = new String[3]; //example of array
+      boolean doorOpen = false; //for the cave door
+      int knobCounter = 0; //three clicks opens the door
+      
+      System.out.println("Welcome to Java Journey!");
+      System.out.println("");
+      introduction(plInventory, doorOpen, knobCounter);
+   }
+}
