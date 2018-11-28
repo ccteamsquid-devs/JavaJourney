@@ -5,6 +5,7 @@ public class JavaJourneyMain112718 { //v4
 //Barrier room!
 //Next version will have error checking for all caps responses
 //Clearing methods are in the game but are not yet implemented.
+//Descriptions have been formatted for readability!
 
 //JAVA JOURNEY BY CEE CEE KAPPLER
 //Final Project - CIS163AA
@@ -15,7 +16,8 @@ public class JavaJourneyMain112718 { //v4
 //IV: Arrays
 //VI: Class Scope
 
-   public static void introduction(String[] plInventory, boolean doorOpen, int knobCounter, boolean barrierOpen) { //This is one of many, many methods.
+   public static void introduction(String[] plInventory, boolean doorOpen, int knobCounter, 
+   boolean barrierOpen) { //This is one of many, many methods.
       
       String userInput;
       char userInput2; //local variable - Class Scope competency
@@ -61,7 +63,9 @@ public class JavaJourneyMain112718 { //v4
       
          System.out.println("River Shore");
          System.out.println("");
-         System.out.println("The waterfall you fell down - and managed to survive - thunders above you. Splashing you with cold droplets, the mighty river to the south flows too fast to cross safely. To the north, the opening to a mysterious cave yawns wide, and to the east, the wind whispers through the tall grass of a forest clearing.");
+         System.out.println("The waterfall you fell down - and managed to survive - thunders above you. Splashing you with cold droplets,");
+         System.out.println("the mighty river to the south flows too fast to cross safely. To the north, the opening to a mysterious cave"); 
+         System.out.println("yawns wide, and to the east, the wind whispers through the tall grass of a forest clearing.");
          System.out.println("");
          riverShore(plInventory, doorOpen, knobCounter, barrierOpen);
       }
@@ -149,7 +153,9 @@ public class JavaJourneyMain112718 { //v4
       
          System.out.println("Strange Cave:");
          System.out.println("");
-         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls - not to mention the fact that there are electric lights set into the walls, leaving no shadows for small creatures to hide in. A large door with a knob in the center stands at the tunnel.");
+         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls -"); 
+         System.out.println("not to mention the fact that there are electric lights set into the walls, leaving no"); 
+         System.out.println("shadows for small creatures to hide in. A large door with a knob in the center stands at the tunnel.");
          System.out.println("");
          
          cave(plInventory, doorOpen, knobCounter, barrierOpen);
@@ -159,7 +165,9 @@ public class JavaJourneyMain112718 { //v4
       
          System.out.println("Strange Cave:");
          System.out.println("");
-         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls - not to mention the fact that there are electric lights set into the walls, leaving no shadows for small creatures to hide in. A large door with a knob in the center stands at the tunnel. It is open.");
+         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls - not"); 
+         System.out.println("to mention the fact that there are electric lights set into the walls, leaving no shadows"); 
+         System.out.println("for small creatures to hide in. A large door with a knob in the center stands at the tunnel. It is open.");
          System.out.println("");
          
          cave(plInventory, doorOpen, knobCounter, barrierOpen);
@@ -263,7 +271,9 @@ public class JavaJourneyMain112718 { //v4
       
          System.out.println("Barrier Chamber:");
          System.out.println("");
-         System.out.println("This was probably some kind of treasure room at one time. Unfortunately, it has been stripped bare over the years - only a few rickety wooden tables and empty chests remain. Exits from the room lead north and south, but the north exit is covered by some kind of barrier that won't let you pass.");
+         System.out.println("This was probably some kind of treasure room at one time. Unfortunately, it has been");
+         System.out.println("stripped bare over the years - only a few rickety wooden tables and empty chests remain."); 
+         System.out.println("Exits from the room lead north and south, but the north exit is covered by some kind of barrier that won't let you pass.");
          System.out.println("");
          
          barrier(plInventory, doorOpen, knobCounter, barrierOpen);
@@ -273,7 +283,8 @@ public class JavaJourneyMain112718 { //v4
       
          System.out.println("Barrier Chamber:");
          System.out.println("");
-         System.out.println("This was probably some kind of treasure room at one time. Unfortunately, it has been stripped bare over the years - only a few rickety wooden tables and empty chests remain. Exits from the room lead north and south.");
+         System.out.println("This was probably some kind of treasure room at one time. Unfortunately, it has been stripped");
+         System.out.println("bare over the years - only a few rickety wooden tables and empty chests remain. Exits from the room lead north and south.");
          System.out.println("");
          
          barrier(plInventory, doorOpen, knobCounter, barrierOpen);
