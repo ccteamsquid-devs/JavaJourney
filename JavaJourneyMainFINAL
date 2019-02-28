@@ -1,0 +1,1101 @@
+import java.util.Scanner;
+
+public class JavaJourneyMainFINAL { 
+
+
+//JAVA JOURNEY BY CEE CEE KAPPLER
+//Final Project - CIS163AA
+//12/10/2018
+//Fulfulls the following requirements:
+//I: Basic Java language concepts: variables: int, char, boolean, and string
+//II: Counter-controlled repetition
+//III: Methods
+//IV: Arrays
+//VI: Class Scope
+
+   public static void introduction(String[] plInventory, 
+      boolean doorOpen, 
+      int knobCounter, 
+      boolean barrierOpen, 
+      boolean flower, 
+      boolean flowerIsPicked, 
+      boolean riddleSolved, 
+      boolean riverHelp,
+      boolean caveHelp,
+      boolean barrierHelp,
+      boolean clearingHelp,
+      boolean mushroomHelp) { //This is one of many, many methods.
+      
+      String userInput;
+      char userInput2; //local variable - Class Scope competency
+   
+      Scanner scnr = new Scanner(System.in);
+      Scanner scnr2 = new Scanner(System.in);
+      
+      System.out.println("Type 'i' for instructions or 'b' to begin.");
+      System.out.print("> ");
+      userInput = scnr.nextLine();
+   
+      switch (userInput){
+         case "i":
+         case "instructions":
+         case "I":
+         case "INSTRUCTIONS":
+            System.out.println("Instructions:");
+            System.out.println("");
+            System.out.println("l or look: shows the description of the room.");
+            System.out.println("n or north, s or south, e or east, w or west: moves you through the game.");
+            System.out.println("i or inventory: lists the items in your inventory");
+            System.out.println("");
+            System.out.println("take <item>: does exactly what it says");
+            System.out.println("Some items can be examined (examine <item>) to determine their use.");
+            System.out.println("Some items can be manipulated by opening or turning.");
+            System.out.println("give <item> <target>: gives item to someone.");
+            System.out.println("say: Lets you talk to a character. No punctuation necessary!");
+            System.out.println("");
+            System.out.println("help: Shows you the commands again.");
+            System.out.println("Type any letter and press enter when ready.");
+            System.out.print("> ");
+            userInput2 = scnr2.next().charAt(0);
+            riverShoreDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+            break;
+         case "b":
+         case "begin":
+         case "B":
+            System.out.println("");
+            System.out.println("");
+            riverShoreDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+            break;
+         default:
+            System.out.println("Try again?");  //Example of recursion for error handling
+            System.out.print("");
+            introduction(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+            break;
+         }
+      }
+      
+      public static void help(String[] plInventory, 
+      boolean doorOpen, 
+      int knobCounter, 
+      boolean barrierOpen, 
+      boolean flower, 
+      boolean flowerIsPicked, 
+      boolean riddleSolved, 
+      boolean riverHelp,
+      boolean caveHelp,
+      boolean barrierHelp,
+      boolean clearingHelp,
+      boolean mushroomHelp){
+      
+            System.out.println("");
+            System.out.println("Instructions:");
+            System.out.println("");
+            System.out.println("l or look: shows the description of the room.");
+            System.out.println("n or north, s or south, e or east, w or west: moves you through the game.");
+            System.out.println("i or inventory: lists the items in your inventory");
+            System.out.println("");
+            System.out.println("take <item>: does exactly what it says");
+            System.out.println("Some items can be examined (examine <item>) to determine their use.");
+            System.out.println("Some items can be manipulated by opening or turning.");
+            System.out.println("give <item> <target>: gives item to someone.");
+            System.out.println("say: Lets you talk to a character. No punctuation necessary!");
+            System.out.println("");
+            System.out.println("help: Shows you the commands again.");
+            System.out.println("");
+            
+            if (riverHelp == true) { //convoluted system of returning to the appropriate method
+               riverHelp = false;
+               riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+            } else {
+               if (caveHelp == true){
+                  caveHelp = false;
+                  cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  } else {
+                     if (barrierHelp == true){
+                        barrierHelp = false;
+                        barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                     } else {
+                        if (clearingHelp == true){
+                        clearingHelp = false;
+                        clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                        } else {
+                           if (mushroomHelp == true){
+                              mushroomHelp = false;
+                              mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                           }
+                        }
+                     }  
+                  }
+          }
+      }
+      
+      public static void riverShoreDesc(
+         String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved,
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+      
+         System.out.println("River Shore");
+         System.out.println("");
+         System.out.println("The waterfall you fell down - and managed to survive - thunders above you. Splashing you with cold droplets,");
+         System.out.println("the mighty river to the south flows too fast to cross safely. To the north, the opening to a mysterious cave"); 
+         System.out.println("yawns wide, and to the east, the wind whispers through the tall grass of a forest clearing.");
+         System.out.println("");
+         riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+      
+      public static void riverShore(String[] plInventory, 
+      boolean doorOpen, 
+      int knobCounter, 
+      boolean barrierOpen, 
+      boolean flower, 
+      boolean flowerIsPicked, 
+      boolean riddleSolved, 
+      boolean riverHelp,
+      boolean caveHelp,
+      boolean barrierHelp,
+      boolean clearingHelp,
+      boolean mushroomHelp){
+      
+         String userInput2;
+         int i = 0; //counter
+         int j = 0; //second counter
+         
+                   
+         Scanner scnr2 = new Scanner(System.in);
+         System.out.print("> ");
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "HELP":
+            case "help":
+            case "Help":
+               riverHelp = true;
+               help(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "look":
+            case "l":
+            case "LOOK":
+            case "Look":
+            case "L":
+               riverShoreDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "south":
+            case "South":
+            case "s":
+            case "S":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("You would drown if you tried to wade into the river.");
+                  riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+               }
+               else{
+                  System.out.println("You would drown if you tried to wade into the river. There is a damp piece of paper stuck beneath a rock, though.");
+                  riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+                  }
+            case "east":
+            case "East":
+            case "e":
+            case "E":
+               if (plInventory[1] == "a beautiful flower"){
+                  clearingAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               } else {
+                  clearingDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  }
+               break;
+            case "take paper":
+            case "Take paper":
+            case "TAKE PAPER":
+               System.out.println("You take the paper.");
+               plInventory[0] = "a wet piece of paper";
+               riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "read paper":
+            case "Read paper":
+            case "READ PAPER":
+            case "LOOK PAPER":
+            case "look paper":
+            case "Look Paper":
+            case "EXAMINE PAPER":
+            case "examine paper":
+               System.out.println("There is nothing on this paper but the number 3.");
+               riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "look flower":
+            case "examine flower":
+            case "LOOK FLOWER":
+            case "EXAMINE FLOWER":
+            case "Look Flower":
+            case "Examine Flower":
+               if (plInventory[1] == "a beautiful flower"){
+                  System.out.println("What a beautiful flower. It might make a lovely gift.");
+                  } else {
+                     System.out.println("You don't have a flower.");
+                     }
+               riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;   
+            case "north":
+            case "n":
+            case "North":
+            case "N":
+               if (doorOpen == true){
+                  caveAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               } else {
+                  caveDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               }
+               break;
+            case "inventory": // Counter-controlled Repetition
+            case "Inventory":
+            case "i":
+            case "I":
+               for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+            
+               riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+            default: 
+               System.out.println("Try again?");
+               riverShore(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+               
+         }
+      }
+      
+      public static void caveDesc(String[] plInventory, 
+      boolean doorOpen, 
+      int knobCounter, 
+      boolean barrierOpen, 
+      boolean flower, 
+      boolean flowerIsPicked, 
+      boolean riddleSolved, 
+      boolean riverHelp,
+      boolean caveHelp,
+      boolean barrierHelp,
+      boolean clearingHelp,
+      boolean mushroomHelp){
+      
+         System.out.println("Strange Cave:");
+         System.out.println("");
+         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls -"); 
+         System.out.println("not to mention the fact that there are electric lights set into the walls, leaving no"); 
+         System.out.println("shadows for small creatures to hide in. A large door with a knob in the center stands at the tunnel.");
+         System.out.println("");
+         System.out.println("A white board hangs on one wall.");
+         System.out.println("");
+         
+         cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+      
+      public static void caveAltDesc(String[] plInventory, 
+      boolean doorOpen, 
+      int knobCounter, 
+      boolean barrierOpen, 
+      boolean flower, 
+      boolean flowerIsPicked,
+      boolean riddleSolved, 
+      boolean riverHelp,
+      boolean caveHelp,
+      boolean barrierHelp,
+      boolean clearingHelp,
+      boolean mushroomHelp){
+      
+         System.out.println("Strange Cave:");
+         System.out.println("");
+         System.out.println("This is a weird cave. It is obviously manmade due to the tool marks on the walls - not"); 
+         System.out.println("to mention the fact that there are electric lights set into the walls, leaving no shadows"); 
+         System.out.println("for small creatures to hide in. A large door with a knob in the center stands at the tunnel. It is open.");
+         System.out.println("");
+         System.out.println("A white board hangs on one wall.");
+         System.out.println("");
+         
+         cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+
+      
+      public static void cave(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved, 
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+         
+         String userInput2;
+         int i = 0; //counter
+         int j = 0; //another counter
+      
+         System.out.print("> ");
+         Scanner scnr2 = new Scanner(System.in);
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "HELP":
+            case "help":
+            case "Help":
+               caveHelp = true;
+               help(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "look board":
+            case "examine board":
+            case "read board":
+            case "look white board":
+            case "read white board":
+            case "examine white board":
+               System.out.println("It reads, 'Has anyone seen my password sheet? I lost it on the shore.'");
+               cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break; 
+            case "look":
+            case "l":
+            case "Look":
+            case "L":
+               if (doorOpen == true){
+                  caveAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  } else {
+                     caveDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  }
+               break;
+            case "inventory":
+            case "i":
+            case "Inventory":
+            case "INVENTORY":
+            case "I":
+                  for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+               cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break; 
+            case "n":
+            case "north":
+            case "North":
+            case "NORTH":
+            case "N":
+               if (doorOpen == false){
+                  System.out.println("The gigantic door stands in your way. Perhaps there is a way to open it.");
+                  cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+               }
+               else if (doorOpen == true){
+                  if (barrierOpen == true){
+                     barrierAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                     } else {
+                        barrierDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                        }
+                  break;
+               }
+            case "read paper":
+            case "Read paper":
+            case "READ PAPER":
+            case "LOOK PAPER":
+            case "look paper":
+            case "Look Paper":
+            case "EXAMINE PAPER":
+            case "examine paper":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("There is nothing on this paper but the number 3.");
+                  cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;}
+               else {
+                  System.out.println("You don't have any paper.");
+               }
+
+            case "south":
+            case "s":
+            case "South":
+            case "S":
+            case "SOUTH":
+               riverShoreDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "open":
+            case "open door":
+            case "OPEN DOOR":
+               System.out.println("You try pushing the door, but it won't budge.");
+               cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "turn knob":
+            case "knob":
+            case "TURN KNOB":
+            case "KNOB":
+            case "Turn Knob":
+               if (doorOpen == true) {
+                  System.out.println("The knob will not budge.");
+                  } else if ((doorOpen == false) && (knobCounter < 2)) {
+                     System.out.println("Click.");
+                     knobCounter = knobCounter + 1; // counter controlled repetition
+                     } else if (knobCounter == 2) {
+                        doorOpen = true;
+                        System.out.println("The huge door opens with an almost cartoonish creak.");
+                        }
+               cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "look flower":
+            case "examine flower":
+            case "LOOK FLOWER":
+            case "EXAMINE FLOWER":
+            case "Look Flower":
+            case "Examine Flower":
+               if (plInventory[1] == "a beautiful flower"){
+                  System.out.println("What a beautiful flower. It might make a lovely gift.");
+                  } else {
+                     System.out.println("You don't have a flower.");
+                     }
+               cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+            
+            default: 
+               System.out.println("Try again?");
+               cave(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+
+            } //end case
+      
+      }
+      
+      public static void barrierDesc(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved, 
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+      
+         System.out.println("Barrier Chamber:");
+         System.out.println("");
+         System.out.println("This was probably some kind of treasure room at one time. Unfortunately, it has been");
+         System.out.println("stripped bare over the years - only a few rickety wooden tables and empty chests remain."); 
+         System.out.println("Exits from the room lead north and south, but the north exit is covered by some kind of barrier that won't let you pass.");
+         System.out.println("");
+         
+         barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+      
+      public static void barrierAltDesc(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved,
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+      
+         System.out.println("Barrier Chamber:");
+         System.out.println("");
+         System.out.println("This was probably some kind of treasure room at one time. Unfortunately, it has been stripped");
+         System.out.println("bare over the years - only a few rickety wooden tables and empty chests remain. Exits from the room lead north and south.");
+         System.out.println("");
+         
+         barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+
+      public static void barrier(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved, 
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+         
+         String userInput2;
+         int i = 0; //counter
+         int j = 0; //another counter
+      
+         System.out.print("> ");
+         Scanner scnr2 = new Scanner(System.in);
+         userInput2 = scnr2.nextLine();
+         
+         switch(userInput2){
+            case "HELP":
+            case "help":
+            case "Help":
+               barrierHelp = true;
+               help(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+
+            case "north":
+            case "n":
+            case "North":
+               if (barrierOpen == false){
+                  System.out.println("You can't pass through the barrier. It shocks you when you try. Ouch!");
+               }
+               else{
+                  treasureRoom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               }
+               barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+             case "south":
+             case "s":
+             case "South":
+               if (doorOpen == true){
+                  caveAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  } else {
+                     caveDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                     }
+               break;
+             case "open barrier":
+             case "barrier":
+             case "Open barrier":
+             case "Open Barrier":
+               if (barrierOpen == false){
+                  System.out.println("You have no idea how to open the barrier.");
+               }
+               else{
+               System.out.println("There is no barrier here.");
+               }
+               barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower,flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+             case "l":
+             case "look":
+             case "LOOK":
+             case "L":
+             case "Look":
+               if (barrierOpen == false){
+               barrierDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               }
+               else {
+               barrierAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               }
+               break;
+            case "read paper":
+            case "Read paper":
+            case "READ PAPER":
+            case "LOOK PAPER":
+            case "look paper":
+            case "Look Paper":
+            case "EXAMINE PAPER":
+            case "examine paper":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("There is nothing on this paper but the number 3.");
+                } else {
+                  System.out.println("You don't have any paper.");
+               }
+               barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+            case "look flower":
+            case "examine flower":
+            case "LOOK FLOWER":
+            case "EXAMINE FLOWER":
+            case "Look Flower":
+            case "Examine Flower":
+               if (plInventory[1] == "a beautiful flower"){
+                  System.out.println("What a beautiful flower. It might make a lovely gift.");
+                  } else {
+                     System.out.println("You don't have a flower.");
+                     }
+               barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  break;
+
+            case "inventory":
+            case "i":
+            case "Inventory":
+            case "INVENTORY":
+                  for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+               barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;    
+             default:
+               System.out.println("Try again?");
+               barrier(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+               
+         }
+      }
+      
+      
+      public static void clearingDesc(String[] plInventory, 
+      boolean doorOpen, 
+      int knobCounter, 
+      boolean barrierOpen, 
+      boolean flower, 
+      boolean flowerIsPicked, 
+      boolean riddleSolved, 
+      boolean riverHelp,
+      boolean caveHelp,
+      boolean barrierHelp,
+      boolean clearingHelp,
+      boolean mushroomHelp){
+      
+         System.out.println("Clearing:");
+         System.out.println("");
+         System.out.println("The grass is bright green here, likely kept trimmed by wild grazing animals, none of which seem");
+         System.out.println("to be making an appearance at the moment. Trees provide shade from the blazing sun, and beds of moss");
+         System.out.println("would make a nice, soft place to rest. Through the trees, you can see a large mushroom to the north.");
+         System.out.println("");
+         System.out.println("A brilliant flower grows here, its petals red and yellow and yawning wide to the sun.");
+         System.out.println("");
+         clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+         
+      }
+      
+       public static void clearingAltDesc(String[] plInventory, 
+       boolean doorOpen, 
+       int knobCounter, 
+       boolean barrierOpen, 
+       boolean flower, 
+       boolean flowerIsPicked, 
+       boolean riddleSolved,
+       boolean riverHelp,
+       boolean caveHelp,
+       boolean barrierHelp,
+       boolean clearingHelp,
+       boolean mushroomHelp){
+      
+         System.out.println("Clearing:");
+         System.out.println("");
+         System.out.println("The grass is bright green here, likely kept trimmed by wild grazing animals, none of which seem");
+         System.out.println("to be making an appearance at the moment. Trees provide shade from the blazing sun, and beds of moss");
+         System.out.println("would make a nice, soft place to rest. Through the trees, you can see a large mushroom to the north.");
+         System.out.println("");
+         clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+         
+      }
+      
+       public static void clearing(String[] plInventory, 
+       boolean doorOpen, 
+       int knobCounter, 
+       boolean barrierOpen, 
+       boolean flower, 
+       boolean flowerIsPicked, 
+       boolean riddleSolved,
+       boolean riverHelp,
+       boolean caveHelp,
+       boolean barrierHelp,
+       boolean clearingHelp,
+       boolean mushroomHelp){
+      
+         String userInput2;
+         int i = 0; //counter                    
+         int j = 0; //another counter
+      
+         System.out.print("> ");
+         Scanner scnr2 = new Scanner(System.in);
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "HELP":
+            case "help":
+            case "Help":
+               clearingHelp = true;
+               help(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+
+            case "take flower":
+            case "pick flower":
+            case "TAKE FLOWER":
+            case "Take Flower":
+            case "take brilliant":
+            case "take brilliant flower":
+            case "get flower":
+            case "GET FLOWER":
+            case "PICK FLOWER": 
+                  if (plInventory[1] == "a beautiful flower"){
+                     System.out.println("You already have the flower.");
+               } else if ((flowerIsPicked == false) && (plInventory[1] != "a beautiful flower")){
+                  plInventory[1] = "a beautiful flower";
+                  System.out.println("You take the flower.");
+                  flowerIsPicked = true;
+                     } else {
+                     System.out.println("You can't see any flower here.");
+                  }
+               clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "inventory":
+            case "i":
+            case "Inventory":
+            case "INVENTORY":
+                  for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+               clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+             case "l":
+             case "look":
+             case "LOOK":
+             case "L":
+             case "Look": 
+               if (plInventory[1] == "a beautiful flower"){
+                  clearingAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               } else {
+                     clearingDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               }
+               break;
+             case "mushroom":
+             case "MUSHROOM":
+             case "Mushroom":
+             case "look mushroom":
+             case "look Mushroom":
+             case "LOOK MUSHROOM":
+                 System.out.println("The mushroom is huge, but the trees prevent you from seeing it all. Going north will get you closer.");
+                 clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                 break;
+            case "read paper":
+            case "Read paper":
+            case "READ PAPER":
+            case "LOOK PAPER":
+            case "look paper":
+            case "Look Paper":
+            case "EXAMINE PAPER":
+            case "examine paper":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("There is nothing on this paper but the number 3.");
+                } else {
+                  System.out.println("You don't have any paper.");
+               }
+               clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "look flower":
+            case "examine flower":
+            case "LOOK FLOWER":
+            case "EXAMINE FLOWER":
+            case "Look Flower":
+            case "Examine Flower": 
+               if ((flowerIsPicked == false) || (plInventory[1] == "a beautiful flower")){
+                  System.out.println("What a beautiful flower. It might make a lovely gift.");
+                  } else {
+                     System.out.println("You can't see any flower here.");
+                     }
+               clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "n":
+            case "north":
+            case "North":
+            case "NORTH":
+               mushroomDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "WEST":
+            case "w":
+            case "west":
+            case "West":
+               riverShoreDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            default:
+               System.out.println("Try again?");
+               clearing(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+         }
+         
+      }
+      
+      public static void mushroomDesc(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved, 
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+      
+         System.out.println("Huge Mushroom:");
+         System.out.println("");
+         System.out.println("This isn't any ordinary mushroom - it stands about ten feet tall, and has been carved into a house -");
+         System.out.println("complete with stained glass windows, painted wood shutters, and a small wooden door. On the porch sits");
+         System.out.println("a fairy queen, who is knitting a sweater out of green lambswool. She pauses when you approach,");
+         System.out.println("regarding you silently with brown eyes behind glittering spectacles."); 
+         System.out.println("");
+         System.out.println("An exit to the south leads out of the grove.");
+         System.out.println("");
+         
+         mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+
+      public static void mushroom(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved,
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+      
+         String userInput2;
+         int i = 0; //counter                    
+         int j = 0; //another counter
+      
+         System.out.print("> ");
+         Scanner scnr2 = new Scanner(System.in);
+         userInput2 = scnr2.nextLine();
+         
+         switch (userInput2){
+            case "HELP":
+            case "help":
+            case "Help":
+               mushroomHelp = true;
+               help(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+
+            case "s":
+            case "S":
+            case "SOUTH":
+            case "south":
+               if (flowerIsPicked == false){
+                  clearingDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  } else {
+                     clearingAltDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                     }
+               break;
+            case "look":
+            case "LOOK":
+            case "l":
+            case "Look":
+            case "L":
+               mushroomDesc(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "look flower":
+            case "examine flower":
+            case "LOOK FLOWER":
+            case "EXAMINE FLOWER":
+            case "Look Flower":
+            case "Examine Flower": 
+               if ((flowerIsPicked == false) || (plInventory[1] == "a beautiful flower")){
+                  System.out.println("What a beautiful flower. It might make a lovely gift.");
+                  } else {
+                     System.out.println("You can't see any flower here.");
+                     }
+               mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "read paper":
+            case "Read paper":
+            case "READ PAPER":
+            case "LOOK PAPER":
+            case "look paper":
+            case "Look Paper":
+            case "EXAMINE PAPER":
+            case "examine paper":
+               if (plInventory[0] == "a wet piece of paper"){
+                  System.out.println("There is nothing on this paper but the number 3.");
+                } else {
+                  System.out.println("You don't have any paper.");
+               }
+               mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+
+            case "inventory":
+            case "i":
+            case "Inventory":
+            case "INVENTORY":
+                  for (i = 0; i < plInventory.length; ++i){
+                  if (plInventory[i] != null){   
+                     System.out.print(plInventory[i] + " ");
+                     System.out.println("");
+                  }
+                  else {
+                     j = j + 1;
+                  }
+               }
+               if (j >= 3) {
+                  System.out.println("You have nothing in your inventory.");
+                  j = 0;
+               }
+               mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+            case "say hello":
+            case "hello":
+               System.out.println("The Queen nods in your direction, and returns to her knitting. Perhaps you can find something to get her attention.");
+               mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+            case "give flower fairy":
+            case "give flower fairy queen":
+            case "GIVE FLOWER FAIRY QUEEN":
+            case "give flower to fairy queen":
+            case "give flower queen":
+            case "GIVE FLOWER FAIRY":
+            case "GIVE FLOWER QUEEN":
+               if (plInventory[1] != "a beautiful flower"){
+                  System.out.println("You can't see any flower here.");
+                  mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+
+               } else if ((flower == false) && (plInventory[1] == "a beautiful flower")){
+                     flower = true;
+                     plInventory[1] = "";
+                     System.out.println("The Queen smiles and accepts the flower from you.");
+                     System.out.println("");
+                     System.out.println("She says, 'Answer me this riddle and gain a most precious treasure with no equal:'");
+                     riddle(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                     }
+               break;
+            case "riddle":
+            case "Riddle":
+            case "RIDDLE":
+            case "SAY RIDDLE":
+            case "say riddle":
+            case "Say Riddle":
+               if (flower == false){
+                  System.out.println("Do you even know what you're talking about?");
+                  mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                  } else {
+                     riddle(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+                     }
+               break;
+            case "say =":
+            case "say equals":
+            case "say equal":
+            case "say ==":
+            case "=":
+            case "==":
+            case "say equal sign":
+            case "say equals sign":
+               if (flower == false){
+                  System.out.println("Do you have any idea what you're talking about?");
+               } else if (riddleSolved == true){
+                     System.out.println("Nothing happens.");
+                  } else if ((riddleSolved == false) && (flower == true)){
+                     barrierOpen = true;
+                     riddleSolved = true;
+                     System.out.println("The Fairy Queen smiles at you and silently returns to her work. You sense that something");
+                     System.out.println("has changed.");
+                     }
+               mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+         
+            default:
+               System.out.println("Try again?");
+               mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+               break;
+         }
+      }
+      
+      public static void riddle(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved, 
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+         
+         System.out.println("");
+         System.out.println("The Queen says: 'I know my manners in plain math: I show up once per day,");
+         System.out.println("But in code's operation is where I tend to play.");
+         System.out.println("If else you forget to place me in the first statement double,");
+         System.out.println("You confused initialization, and may find compiler trouble.");
+         System.out.println("");
+         System.out.println("What am I?'");
+         System.out.println("");
+         System.out.println("The Queen says, 'If you need to hear the riddle again, say 'riddle'.'");
+         System.out.println("");
+         mushroom(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+      }
+
+      public static void treasureRoom(String[] plInventory, 
+         boolean doorOpen, 
+         int knobCounter, 
+         boolean barrierOpen, 
+         boolean flower, 
+         boolean flowerIsPicked, 
+         boolean riddleSolved,
+         boolean riverHelp,
+         boolean caveHelp,
+         boolean barrierHelp,
+         boolean clearingHelp,
+         boolean mushroomHelp){
+      
+      System.out.println("On a table, you find a gigantic book, almost too heavy for you to possibly carry. You have found the greatest treasure of all - KNOWLEDGE!");
+      System.out.println("Or it might be the greatest curse. But that's another story.");
+      System.out.println("");
+      System.out.println("Congratulations! You have won -JAVA JOURNEY!-");
+      System.out.println("Thank you for playing!");
+      }
+      
+      
+   
+      public static void main(String[] args){     //global variables for Class Scope competency
+                                                  //multiple types for Competency I - boolean, int, string, and character variables
+      String userInput;
+      String[] plInventory = new String[3]; //example of array - competency
+      boolean doorOpen = false; //for the cave door
+      int knobCounter = 0; //three clicks opens the door
+      boolean barrierOpen = false; //for the barrier
+      boolean flower = false; //does the Fairy Queen have the flower?
+      boolean flowerIsPicked = false; //is the flower picked?
+      boolean riddleSolved = false; //is the riddle solved?
+       /*Help file variables*/
+      boolean riverHelp = false;
+      boolean caveHelp = false;
+      boolean barrierHelp = false;
+      boolean clearingHelp = false;
+      boolean mushroomHelp = false;
+      
+      System.out.println("Welcome to Java Journey!");
+      System.out.println("");
+      introduction(plInventory, doorOpen, knobCounter, barrierOpen, flower, flowerIsPicked, riddleSolved, riverHelp, caveHelp, barrierHelp, clearingHelp, mushroomHelp);
+   }
+}
